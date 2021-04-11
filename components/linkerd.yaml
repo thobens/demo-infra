@@ -1,0 +1,19 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: linkerd
+  namespace: infrastructure
+spec:
+  releaseName: linkerd2
+  chart:
+    repository: https://helm.linkerd.io/stable
+    name: linkerd2
+    version: 2.10
+  valuesFrom:
+    - secretKeyRef:
+        name: linkerd-certs
+        optional: false
+  values:
+    identity:
+      issuer:
+        crtExpiry: 2030-11-05T18:05:49Z
