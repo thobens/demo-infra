@@ -1,0 +1,21 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: infrastructure
+spec:
+  releaseName: ingress-nginx
+  chart:
+    repository: https://kubernetes.github.io/ingress-nginx
+    name: ingress-nginx
+    version: 3.26.0
+  values:
+    controller:
+      service:
+        externalTrafficPolicy: Local
+      metrics:
+        enabled: true
+        service:
+          annotations:
+            prometheus.io/port: "10254"
+            prometheus.io/scrape: "true"
