@@ -1,1 +1,35 @@
-{"version":"0.8.0","vendor":"","loki":{"enabled":true},"nginx":{"enabled":true,"host":"trec.ch"},"certManager":{"enabled":true,"email":"andreas.doebeli@immosky.com"},"oauth2Proxy":{"enabled":false,"org":"","user":"","clientID":"","clientSecret":"","cookieSecret":""},"prometheus":{"enabled":true},"linkerd":{"enabled":false,"crtExpiry":"","certs":""},"sealedSecrets":{"enabled":true,"sealingKey":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDatcrlNjl0t236cdXTBZUuZIJFF0gntlOFtiScsAbY65bEUeKkoo2k0xie+cFdjL3p6kCJ6knRvsPrD6rLRFE/OrvEScWb26n9sgHOI6rV8Mm1wKY3sEtjfgNncQhdqYftk8ut67DGNP50bi5rCIVVGridp8uIORku2C0gKt7qDe3n1jnJq7Gb0I4dOCpi+tl30I4Vumos0jUY9OfHfrir2JYDq4WvLkRPwxyatolkB7EO0+4E7Py8MiBCR/lKfZEtq652rw0vlOjSI0DkpR0cOrzEfV4r33LOSZEZWNK3DjCfa+1abeemkPmP6DCo7b5IizJDoWWQRSzSMb9pxz0n/qzR6a3iiAPO/nVau29Mgfg4mroBSKuzje9R0NX1VJhJId4Q2LPlr3vQ8uTF6u+FuJ0M/Qt7Y5AuqU5ib+4hIHFjYlVE2V47OJiTKDhaJHYg0ZYOjHYy/LsGdGpCyGDH/cXK0CJM71HvFOJmrrklvrtw9zEBfnNj6fvOAROrQP0="}}
+{
+    "version": "0.8.0",
+    "vendor": "",
+    "loki": {
+        "enabled": true
+    },
+    "nginx": {
+        "enabled": true,
+        "host": "trec.ch"
+    },
+    "certManager": {
+        "enabled": true,
+        "email": "andreas.doebeli@immosky.com"
+    },
+    "oauth2Proxy": {
+        "enabled": false,
+        "org": "",
+        "user": "",
+        "clientID": "",
+        "clientSecret": "",
+        "cookieSecret": ""
+    },
+    "prometheus": {
+        "enabled": true
+    },
+    "linkerd": {
+        "enabled": true,
+        "crtExpiry": "",
+        "certs": ""
+    },
+    "sealedSecrets": {
+        "enabled": true,
+        "sealingKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDatcrlNjl0t236cdXTBZUuZIJFF0gntlOFtiScsAbY65bEUeKkoo2k0xie+cFdjL3p6kCJ6knRvsPrD6rLRFE/OrvEScWb26n9sgHOI6rV8Mm1wKY3sEtjfgNncQhdqYftk8ut67DGNP50bi5rCIVVGridp8uIORku2C0gKt7qDe3n1jnJq7Gb0I4dOCpi+tl30I4Vumos0jUY9OfHfrir2JYDq4WvLkRPwxyatolkB7EO0+4E7Py8MiBCR/lKfZEtq652rw0vlOjSI0DkpR0cOrzEfV4r33LOSZEZWNK3DjCfa+1abeemkPmP6DCo7b5IizJDoWWQRSzSMb9pxz0n/qzR6a3iiAPO/nVau29Mgfg4mroBSKuzje9R0NX1VJhJId4Q2LPlr3vQ8uTF6u+FuJ0M/Qt7Y5AuqU5ib+4hIHFjYlVE2V47OJiTKDhaJHYg0ZYOjHYy/LsGdGpCyGDH/cXK0CJM71HvFOJmrrklvrtw9zEBfnNj6fvOAROrQP0="
+    }
+}

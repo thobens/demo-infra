@@ -296,5 +296,6 @@ Output:
     linkerd-web-8446d6bb88-sttk5              2/2     Running   0          25h
 Access Linkerd dashboard:
 
-kubectl port-forward svc/linkerd-web --namespace linkerd 8084:8084
+    kubectl port-forward svc/linkerd-web --namespace linkerd 8084:8084
+    
 Then access localhost:8084 from your browser.
