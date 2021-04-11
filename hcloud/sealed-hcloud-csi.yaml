@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+  creationTimestamp: null
+  name: hcloud-csi
+  namespace: kube-system
+spec:
+  encryptedData:
+    token: AgCMZ6K8oUVBitBvHYckr8hDTt2rT5FqWrCLIDYYQ/0K0OsDwEY6mU1JiSEpkJTiHZeYNHfjNxhkOa1CkqfnzJIGFw0Ewcbbo24YcCOZwXtQvsWaOHWYerohcL097YRtyATW+WHMoby1g9ZAkSyblj8C0xZnQhXuWj/0OHsP6eYCyDcnWOvddGAeNx2K8K4doUm1cyFbynnSWgkXxtu/JzNwBlAxqqYhvso7G3gN0vuMvHr14rKXB4MkvUWzz8Ydp19UNJbaKanftvT796ckMpwd8InrbpIr2DLQVEk6ZYn9vH13Dw+8C1PDjaB4EnldGlho2I7RiHHsq9otcCLxOHD7O3UN44H/rJIM1GQuxYSCVSlkA/s1f5hc43C80xmUH/Af5b72syvUaZLOZpUd3gYL2Roj5L8x4YZczYWO52Dfin8s62/2Iv1MupzSI8mmm7YZarYz3GUPPs+9PcsDyQ+Pt6dKDrsZnLtuM0j9xC6XpjX5O5XO4S9JhhgNCdZXAf3/C7P4eQExM9t6U/tYY5l6TjETuwA4nh6kESnLBNTaQIdlWAnzVRDmkH5OZbfGo3MraZI2U+Jwu2s8stl3wGr0UX3IJYRuUpmJag0QkZwPadmrviPmKRLjaeSrm5/c+J1hgW2ycF9TNLlV/K+RrLJJ3kEdbyiZfJQHF/TKwxaGHK8BFbMe7pp1WitQUk1oR96RdnpB2bwzHRiXGzOYjd7gvC5EgZxBPAVnxj1R7dprlZihrhTtk/wM+jTLvsXa/YvGAFVLWbK14kPt6gTWopjbxA==
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      creationTimestamp: null
+      name: hcloud-csi
+      namespace: kube-system
+
