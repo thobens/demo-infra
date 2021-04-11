@@ -44,6 +44,7 @@ To add hetzner nodes for clusters, open rancher and go to *Tools* - *Driver* in 
 ## Install stack
 
     kubectl create namespace flux
+    kubectl create configmap flux-ssh-config --from-file=$HOME/.ssh/known_hosts -n flux
     kubectl apply -f bootstrap
 
 ## Verify stack
@@ -240,7 +241,7 @@ Mac:
     brew install kubeseal
 Linux:
 
-    wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/kubeseal-linux-amd64 -O kubeseal
+    wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/kubeseal-linux-amd64 -O kubeseal
     sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
 **Steps after first installation**

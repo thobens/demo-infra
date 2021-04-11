@@ -8,7 +8,7 @@ spec:
   chart:
     repository: https://helm.linkerd.io/stable
     name: linkerd2
-    version: 2.10
+    version: 2.9.1
   valuesFrom:
     - secretKeyRef:
         name: linkerd-certs
