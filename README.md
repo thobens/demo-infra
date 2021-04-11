@@ -1,5 +1,51 @@
 # Demo Infra for diverse website deployment
 
+## Deploy Rancher for cluster provisioning
+
+### Local
+
+    docker run -d --restart=unless-stopped \
+    -p 80:80 -p 443:443 \
+    --privileged \
+    rancher/rancher:latest
+
+### Hetzner via terraform
+
+    cd rancher
+
+Make sure to have a `hetzner.auto.tfvars` in the current folder. Set the following variables:
+
+    api_token = "HETZNER_API_TOKEN"
+    ssh_keys = "[\"YOUR_SSH_PUBKEY\" ]"
+
+If running for the first time:
+    terraform init
+    terraform plan
+
+Then run:
+
+    terraform apply
+
+
+### Configuration
+
+#### Hetzner
+
+##### Install Node Driver
+
+To add hetzner nodes for clusters, open rancher and go to *Tools* - *Driver* in the menu, then open the tab "Node Drivers" and click "Add Node Driver*. Add the following properties:
+
+- Download URL: https://github.com/JonasProgrammer/docker-machine-driver-hetzner/releases/download/3.3.0/docker-machine-driver-hetzner_3.3.0_linux_amd64.tar.gz
+
+- Custom UI URL: https://storage.googleapis.com/hcloud-rancher-v2-ui-driver/component.js
+
+- Whitelist Domains: storage.googleapis.com
+
+## Install stack
+
+    kubectl create namespace flux
+    kubectl apply -f bootstrap
+
 ## Verify stack
 
 ### Grafana Loki
