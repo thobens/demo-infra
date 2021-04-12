@@ -11,11 +11,16 @@ ns ?= kube-system
 
 default: help
 
-## help		Display available make targets
+## help			Display available make targets
 help: Makefile
 	@sed -n 's/^##//p' $<
 
-## init		Initializes the infrastructure
+##
+## SETUP
+## =====
+##
+
+## init			Initializes the infrastructure
 init:
 	@kubectl create namespace flux
 	@kubectl create configmap flux-ssh-config --from-file=${HOME}/.ssh/known_hosts -n flux
@@ -26,15 +31,19 @@ init:
 	@echo "  make hcloud-csi-secret token=<hcloud CSI token>"
 	@echo "  make install"
 
-## install	Installs the infrastructure. This actually just removes the taint 
-##			"node.cloudprovider.kubernetes.io/uninitialized" from all nodes
+## install		Installs the infrastructure. This actually just removes the taint 
+##  			"node.cloudprovider.kubernetes.io/uninitialized" from all nodes
 install:
 	@echo "Remove 'uninitialized' taint from all nodes"
 	@kubectl taint node --all node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
 	@echo "Installing infrastructure..."
 
+##
+## SECRET MANAGEMENT
+## =================
+## 
 
-## update-sealing-key	Update the sealed secrets on the cluster
+## update-sealed-secrets	Update the sealed secrets on the cluster
 update-sealed-secrets:
 	@kubectl apply -f hcloud/sealed-hcloud-csi.yaml
 	@kubectl apply -f hcloud/sealed-hcloud.yaml
@@ -44,7 +53,8 @@ update-sealed-secrets:
 fetch-sealing-key:
 	@kubeseal --fetch-cert --controller-namespace=infrastructure > sealing-key.pub
 
-## hcloud-secret	creates a hcloud secret for the cloud controller manager in the kube-system namespace
+## hcloud-secret		creates a hcloud secret for the cloud controller manager 
+## 			in the kube-system namespace
 hcloud-secret:
 	-@printf "%s" "${token}" | kubectl -n "$(ns)" create secret generic "hcloud" \
 	--dry-run=client --from-file=token=/dev/stdin -o yaml > hcloud/secret-hcloud.yaml
@@ -57,3 +67,14 @@ hcloud-csi-secret:
 	--dry-run=client --from-file=token=/dev/stdin -o yaml > hcloud/secret-hcloud-csi.yaml
 	-@kubeseal --scope=cluster-wide --format yaml --controller-namespace=infrastructure <hcloud/secret-hcloud-csi.yaml >hcloud/sealed-hcloud-csi.yaml
 	-@rm hcloud/secret-hcloud-csi.yaml
+
+##
+## DEPLOYMENT
+## ==========
+## 
+
+## add-module		Fetch the sealing key from the sealed-secretes-controller
+add-module:
+	@kubeseal --fetch-cert --controller-namespace=infrastructure > sealing-key.pub
+
+## 
