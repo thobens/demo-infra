@@ -1,2 +1,3 @@
 .ssh
 rancher/hetzner.auto.tfvars
+.tokens

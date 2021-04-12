@@ -24,10 +24,10 @@ init:
 	@echo "  make update-sealing key"
 	@echo "  make hcloud-secret token=<hcloud API token>"
 	@echo "  make hcloud-csi-secret token=<hcloud CSI token>"
-	@echo "then run `make install`"
+	@echo "  make install"
 
 ## install	Installs the infrastructure. This actually just removes the taint 
-##			`node.cloudprovider.kubernetes.io/uninitialized` from all nodes
+##			"node.cloudprovider.kubernetes.io/uninitialized" from all nodes
 install:
 	@echo "Remove 'uninitialized' taint from all nodes"
 	@kubectl taint node --all node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
@@ -46,14 +46,14 @@ fetch-sealing-key:
 
 ## hcloud-secret	creates a hcloud secret for the cloud controller manager in the kube-system namespace
 hcloud-secret:
-	-@echo "${token}" | kubectl -n "$(ns)" create secret generic "hcloud" \
+	-@printf "%s" "${token}" | kubectl -n "$(ns)" create secret generic "hcloud" \
 	--dry-run=client --from-file=token=/dev/stdin -o yaml > hcloud/secret-hcloud.yaml
 	-@kubeseal --scope=cluster-wide --format yaml --controller-namespace=infrastructure <hcloud/secret-hcloud.yaml >hcloud/sealed-hcloud.yaml
-# -@rm hcloud/secret-hcloud.yaml
+	-@rm hcloud/secret-hcloud.yaml
 
 ## hcloud-csi-secret	creates a csi secret for the hcloud csi in the kube-system namespace
 hcloud-csi-secret:
-	-@echo "${token}" | kubectl -n "$(ns)" create secret generic "hcloud-csi" \
+	-@printf "%s" "${token}" | kubectl -n "$(ns)" create secret generic "hcloud-csi" \
 	--dry-run=client --from-file=token=/dev/stdin -o yaml > hcloud/secret-hcloud-csi.yaml
 	-@kubeseal --scope=cluster-wide --format yaml --controller-namespace=infrastructure <hcloud/secret-hcloud-csi.yaml >hcloud/sealed-hcloud-csi.yaml
-# -@rm hcloud/secret-hcloud-csi.yaml
+	-@rm hcloud/secret-hcloud-csi.yaml
