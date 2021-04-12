@@ -57,9 +57,10 @@ spec:
         - image: hetznercloud/hcloud-cloud-controller-manager:v1.8.1
           name: hcloud-cloud-controller-manager
           command:
-            - "/bin/sh"
-            - "-c"
-            - "echo hcloud-token: && echo $HCLOUD_TOKEN && /bin/hcloud-cloud-controller-manager --cloud-provider=hcloud --leader-elect=false --allow-untagged-cloud"
+            - "/bin/hcloud-cloud-controller-manager"
+            - "--cloud-provider=hcloud"
+            - "--leader-elect=false"
+            - "--allow-untagged-cloud"
           resources:
             requests:
               cpu: 100m
@@ -74,3 +75,5 @@ spec:
                 secretKeyRef:
                   name: hcloud
                   key: token
+            - name: HCLOUD_DEBUG
+              value: "true"
