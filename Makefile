@@ -3,6 +3,8 @@ ns ?= kube-system
 .PHONY: 
 	help \
 	init \
+	install \
+	update-sealing-key \
 	hcloud-secret \
 	hcloud-csi-secret 
 
@@ -14,10 +16,19 @@ help: Makefile
 
 ## init		Initializes the infrastructure
 init:
-	-@kubeseal --fetch-cert --controller-namespace=infrastructure > sealing-key.pub
-	-@kubectl create namespace flux
-    -@kubectl create configmap flux-ssh-config --from-file=${HOME}/.ssh/known_hosts -n flux
-    -@kubectl apply -f bootstrap
+	@kubectl create namespace flux
+	@kubectl create configmap flux-ssh-config --from-file=${HOME}/.ssh/known_hosts -n flux
+	@kubectl apply -f bootstrap
+
+## install	Installs the infrastructure. This actually just removes the taint 
+##			`node.cloudprovider.kubernetes.io/uninitialized` from all nodes
+install:
+	@kubectl taint nodes node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
+	@echo "Waiting for sealed-secrets-controller"
+	
+## update-sealing-key	Update the sealing key from the sealed-secretes-controller
+update-sealing-key:
+	@kubeseal --fetch-cert --controller-namespace=infrastructure > sealing-key.pub
 
 ## hcloud-secret	creates a hcloud secret for hetzner in the kube-system namespace
 hcloud-secret:

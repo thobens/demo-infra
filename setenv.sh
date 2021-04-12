@@ -1,0 +1,1 @@
+export KUBECONFIG=../trec.ch-data/kubeconfig

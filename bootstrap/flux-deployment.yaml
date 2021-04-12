@@ -61,6 +61,12 @@ spec:
       #     secretName: flux-gpg-keys
       #     defaultMode: 0400
 
+      tolerations:
+        # this taint is set by all kubelets running `--cloud-provider=external`
+        # so we should tolerate it to schedule flux
+        - key: "node.cloudprovider.kubernetes.io/uninitialized"
+          value: "true"
+          effect: "NoSchedule"
       containers:
         - name: flux
           # There are no ":latest" images for flux. Find the most recent
