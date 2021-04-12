@@ -61,6 +61,7 @@ spec:
             - "--cloud-provider=hcloud"
             - "--leader-elect=false"
             - "--allow-untagged-cloud"
+            - "--debug"
           resources:
             requests:
               cpu: 100m
